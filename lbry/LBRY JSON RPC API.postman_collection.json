@@ -1,0 +1,324 @@
+{
+	"variables": [],
+	"info": {
+		"name": "LBRY JSON RPC API",
+		"_postman_id": "39588f58-3fc2-dbb8-fa8e-8ed079acc5f0",
+		"description": "Postman share of the calls to LBRY API Protocol",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Resolve",
+			"request": {
+				"url": "http://localhost:5279/lbryapi",
+				"method": "POST",
+				"header": [
+					{
+						"key": "//data",
+						"value": "{\"method\":\"resolve\",\"params\":{\"uri\":\"what\"}}'",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "//Content",
+						"value": "application/json",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "//Content-Type",
+						"value": "application/json",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"jsonrpc\": \"2.0\",\n\t\"method\":\"resolve\",\n\t\"params\":\n\t{\n\t\t\"uri\":\"what\"\n\t}\n}"
+				},
+				"description": "Resolve - verifies a uri is present on the blockchain - Resolve a LBRY URI\n\nResolve a LBRY URI\n\nArgs:\n    'uri': (str) uri to download\nReturns:\n    None if nothing can be resolved, otherwise:\n    If uri resolves to a channel or a claim in a channel:\n        'certificate': {\n            'address': (str) claim address,\n            'amount': (float) claim amount,\n            'effective_amount': (float) claim amount including supports,\n            'claim_id': (str) claim id,\n            'claim_sequence': (int) claim sequence number,\n            'decoded_claim': (bool) whether or not the claim value was decoded,\n            'height': (int) claim height,\n            'depth': (int) claim depth,\n            'has_signature': (bool) included if decoded_claim\n            'name': (str) claim name,\n            'supports: (list) list of supports [{'txid': txid,\n                                                 'nout': nout,\n                                                 'amount': amount}],\n            'txid': (str) claim txid,\n            'nout': (str) claim nout,\n            'signature_is_valid': (bool), included if has_signature,\n            'value': ClaimDict if decoded, otherwise hex string\n        }\n    If uri resolves to a channel:\n        'claims_in_channel': [\n            {\n                'address': (str) claim address,\n                'amount': (float) claim amount,\n                'effective_amount': (float) claim amount including supports,\n                'claim_id': (str) claim id,\n                'claim_sequence': (int) claim sequence number,\n                'decoded_claim': (bool) whether or not the claim value was decoded,\n                'height': (int) claim height,\n                'depth': (int) claim depth,\n                'has_signature': (bool) included if decoded_claim\n                'name': (str) claim name,\n                'supports: (list) list of supports [{'txid': txid,\n                                                     'nout': nout,\n                                                     'amount': amount}],\n                'txid': (str) claim txid,\n                'nout': (str) claim nout,\n                'signature_is_valid': (bool), included if has_signature,\n                'value': ClaimDict if decoded, otherwise hex string\n            }\n        ]\n    If uri resolves to a claim:\n        'claim': {\n            'address': (str) claim address,\n            'amount': (float) claim amount,\n            'effective_amount': (float) claim amount including supports,\n            'claim_id': (str) claim id,\n            'claim_sequence': (int) claim sequence number,\n            'decoded_claim': (bool) whether or not the claim value was decoded,\n            'height': (int) claim height,\n            'depth': (int) claim depth,\n            'has_signature': (bool) included if decoded_claim\n            'name': (str) claim name,\n            'channel_name': (str) channel name if claim is in a channel\n            'supports: (list) list of supports [{'txid': txid,\n                                                 'nout': nout,\n                                                 'amount': amount}]\n            'txid': (str) claim txid,\n            'nout': (str) claim nout,\n            'signature_is_valid': (bool), included if has_signature,\n            'value': ClaimDict if decoded, otherwise hex string\n        }\n    }"
+			},
+			"response": []
+		},
+		{
+			"name": "Get",
+			"request": {
+				"url": "http://localhost:5279/lbryapi",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"jsonrpc\": \"2.0\",\n\t\"method\":\"get\",\n\t\"params\":\n\t{\n\t\t\"uri\":\"what\"\n\t}\n}"
+				},
+				"description": "Get - Download stream from a LBRY name."
+			},
+			"response": []
+		},
+		{
+			"name": "Publish - Anonymously",
+			"request": {
+				"url": "http://localhost:5279/lbryapi",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"jsonrpc\": \"2.0\",\n\t\"method\":\"publish\",\n\t\"params\":\n\t{\n\t\t\"name\": \"clashofagespromodfc2017\",\n\t\t\"file_path\": \"/Users/elswick/Movies/ClashOfAgesPromo2017.mp4\",\n\t\t\"bid\": 0.001,\n\t\t\"metadata\":  {\n    \t\t\"description\": \"Promotional video for the 2017 Clash of Ages in Birch Run, MI for the Detroit Fight Club participation.\",\n    \t\t\"title\": \"Clash of Ages 2017 Detroit Fight Club Promo\",\n    \t\t\"author\": \"Richard Elswick\",\n    \t\t\"language\": \"en\",\n    \t\t\"license\": \"Creative Commons 4.0 Attribution + Noncommercial\",\n    \t\t\"nsfw\": false\n\t\t}\n\t}\n}"
+				},
+				"description": "Publish - Make a new name claim and publish associated data to lbrynet, update over existing claim if user already has a claim for name.\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Publish - by channel name and id",
+			"request": {
+				"url": "http://localhost:5279/lbryapi",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"jsonrpc\": \"2.0\",\n\t\"method\":\"publish\",\n\t\"params\":\n\t{\n\t\t\"name\": \"2013-detroit-fight-club-michrenfest\",\n\t\t\"file_path\": \"/Users/elswick/Movies/Central Division Tournament - Team USA, Detroit Fight Club at Michigan Renaissance Festival.mp4\",\n\t\t\"bid\": 0.001,\n\t\t\"channel_name\": \"@painbank\",\n\t\t\"metadata\":  {\n    \t\t\"description\": \"Detroit Fight Club tournament at Michigan Renaisance Faire in 2013.\",\n    \t\t\"title\": \"Detroit Fight Club Tournament at Michigan Ren Faire in 2013\",\n    \t\t\"author\": \"Richard Elswick\",\n    \t\t\"thumbnail\": \"https://spee.ch/54f6beb257b018ae7980956b4ff0c11cb0cc8ab5/dfclogo\",\n    \t\t\"language\": \"en\",\n    \t\t\"license\": \"Creative Commons 4.0 Attribution + Noncommercial\",\n    \t\t\"nsfw\": false\n\t\t}\n\t}\n}"
+				},
+				"description": "Make a new name claim and publish associated data to lbrynet,\nupdate over existing claim if user already has a claim for name.\n\nFields required in the final Metadata are:\n    'title'\n    'description'\n    'author'\n    'language'\n    'license',\n    'nsfw'\n\nMetadata can be set by either using the metadata argument or by setting individual arguments\nfee, title, description, author, language, license, license_url, thumbnail, preview, nsfw,\nor sources. Individual arguments will overwrite the fields specified in metadata argument.\n\nArgs:\n    'name': (str) name to be claimed\n    'bid': (float) amount of credits to commit in this claim,\n    'metadata'(optional): (dict) Metadata to associate with the claim.\n    'file_path'(optional): (str) path to file to be associated with name. If provided,\n                            a lbry stream of this file will be used in 'sources'.\n                            If no path is given but a metadata dict is provided, the source\n                            from the given metadata will be used.\n    'fee'(optional): (dict) Dictionary representing key fee to download content:\n                      {currency_symbol: {'amount': float, 'address': str, optional}}\n                      supported currencies: LBC, USD, BTC\n                      If an address is not provided a new one will be automatically\n                      generated. Default fee is zero.\n    'title'(optional): (str) title of the file\n    'description'(optional): (str) description of the file\n    'author'(optional): (str) author of the file\n    'language'(optional): (str), language code\n    'license'(optional): (str) license for the file\n    'license_url'(optional): (str) URL to license\n    'thumbnail'(optional): (str) thumbnail URL for the file\n    'preview'(optional): (str) preview URL for the file\n    'nsfw'(optional): (bool) True if not safe for work\n    'sources'(optional): (dict){'lbry_sd_hash':sd_hash} specifies sd hash of file\n    'channel_name' (optional): (str) name of the publisher channel\n\nReturns:\n    (dict) Dictionary containing result of the claim\n    {\n        'tx' : (str) hex encoded transaction\n        'txid' : (str) txid of resulting claim\n        'nout' : (int) nout of the resulting claim\n        'fee' : (float) fee paid for the claim transaction\n        'claim_id' : (str) claim ID of the resulting claim\n    }"
+			},
+			"response": []
+		},
+		{
+			"name": "Claim Abandon",
+			"request": {
+				"url": "http://localhost:5279/lbryapi",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"jsonrpc\": \"2.0\",\n\t\"method\":\"claim_abandon\",\n\t\"params\":\n\t{\n\t\t\"claim_id\": \"123f94f2505ac669086688e5827ddfd25781373b\"\n\t}\n}"
+				},
+				"description": "Abandon a name and reclaim credits from the claim\n\nArgs:\n    'claim_id': (str) claim_id of claim\nReturn:\n    (dict) Dictionary containing result of the claim\n    {\n        txid : (str) txid of resulting transaction\n        fee : (float) fee paid for the transaction\n    }"
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction List",
+			"request": {
+				"url": "http://localhost:5279/lbryapi",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"jsonrpc\": \"2.0\",\n\t\"method\":\"transaction_list\"\n}"
+				},
+				"description": "List transactions belonging to wallet\n\nArgs:\n    None\nReturns:\n    (list) List of transactions"
+			},
+			"response": []
+		},
+		{
+			"name": "Transaction Show",
+			"request": {
+				"url": "http://localhost:5279/lbryapi",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"jsonrpc\": \"2.0\",\n\t\"method\":\"transaction_show\",\n\t\"params\":\n\t{\n\t\t\"txid\": \"7bd3f51dd433fa4ac0b161e6e37ae59ec0988835ddd504126f85667e564e2c2f\"\n\t}\n}"
+				},
+				"description": "Get a decoded transaction from a txid\n\n(appears to only be valid for Tx related to LBC transcations)\n\nArgs:\n    'txid': (str) txid of transaction\nReturns:\n    (dict) JSON formatted transaction"
+			},
+			"response": []
+		},
+		{
+			"name": "Claim Show by TxID",
+			"request": {
+				"url": "http://localhost:5279/lbryapi",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"jsonrpc\": \"2.0\",\n\t\"method\":\"claim_show\",\n\t\"params\":\n\t{\n\t\t\"txid\": \"431f44e0795b735cee367b5eb9c3de750f536896b74fcae5626526d89cae9dc6\",\n\t\t\"nout\": 0\n\t}\n}"
+				},
+				"description": "Resolve claim info from a LBRY name\n\nArgs:\n    'txid'(optional): (str) if specified, look for claim with this txid\n    'nout'(optional): (int) if specified, look for claim with this nout\nReturns:\n    (dict) Dictionary containing claim info, (bool) false if claim is not\n        resolvable\n\n    {\n        'txid': (str) txid of claim\n        'nout': (int) nout of claim\n        'amount': (float) amount of claim\n        'value': (str) value of claim\n        'height' : (int) height of claim takeover\n        'claim_id': (str) claim ID of claim\n        'supports': (list) list of supports associated with claim\n    }"
+			},
+			"response": []
+		},
+		{
+			"name": "Claim Show by Claim ID",
+			"request": {
+				"url": "http://localhost:5279/lbryapi",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"jsonrpc\": \"2.0\",\n\t\"method\":\"claim_show\",\n\t\"params\":\n\t{\n\t\t\"claim_id\": \"f7db2a011447bc2517c1fe6b6473607f48a75b5e\"\n\t}\n}"
+				},
+				"description": "Resolve claim info from a LBRY name\n\nArgs:\n    'claim_id': (str) if specified, look for claim with this claim_id\nReturns:\n    (dict) Dictionary containing claim info, (bool) false if claim is not\n        resolvable\n\n    {\n        'txid': (str) txid of claim\n        'nout': (int) nout of claim\n        'amount': (float) amount of claim\n        'value': (str) value of claim\n        'height' : (int) height of claim takeover\n        'claim_id': (str) claim ID of claim\n        'supports': (list) list of supports associated with claim\n    }"
+			},
+			"response": []
+		},
+		{
+			"name": "Report Bug",
+			"request": {
+				"url": "http://localhost:5279/lbryapi",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"jsonrpc\": \"2.0\",\n\t\"method\":\"report_bug\",\n\t\"params\":\n\t{\n\t\t\"message\": \"sending a POST request to http:////localhost:5279//lbryapi for publish fails. results in: lbryschema.error.DecodeError: Message type \\\"Metadata\\\" has no field named \\\"channel_id\\\"  also fails for \\\"channel_name\\\" as well\"\n\t}\n}"
+				},
+				"description": "Report a bug to slack\n\nArgs:\n    'message': (str) message to send\nReturns:\n    (bool) true if successful"
+			},
+			"response": []
+		},
+		{
+			"name": "Wallet List",
+			"request": {
+				"url": "http://localhost:5279/lbryapi",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"jsonrpc\": \"2.0\",\n\t\"method\":\"wallet_list\"\n}"
+				},
+				"description": "List wallet addresses\n\nArgs:\n    None\nReturns:\n    List of wallet addresses"
+			},
+			"response": []
+		},
+		{
+			"name": "Wallet",
+			"request": {
+				"url": "http://localhost:5279/lbryapi",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"jsonrpc\": \"2.0\",\n\t\"method\":\"wallet_is_address_mine\",\n\t\"params\":\n\t{\n\t\t\"address\":\"bWm1aGyFEViGagRV2YPDo5Pz66qnhqohym\"\n\t}\n}"
+				},
+				"description": "Checks if an address is associated with the current wallet.\n\nArgs:\n    'address': (str) address to check in base58\nReturns:\n    (bool) true, if address is associated with current wallet"
+			},
+			"response": []
+		},
+		{
+			"name": "Wallet Balance",
+			"request": {
+				"url": "http://localhost:5279/lbryapi",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"jsonrpc\": \"2.0\",\n\t\"method\":\"wallet_balance\",\n\t\"params\":\n\t{\n\t\t\"address\":\"bWm1aGyFEViGagRV2YPDo5Pz66qnhqohym\"\n\t}\n}"
+				},
+				"description": "Return the balance of the wallet\n\nArgs:\n    'address' (optional): If address is provided only that balance will be given\n    'include_unconfirmed' (optional): If set unconfirmed balance will be included in\n     the only takes effect when address is also provided.\n\nReturns:\n    (float) amount of lbry credits in wallet"
+			},
+			"response": []
+		},
+		{
+			"name": "Version",
+			"request": {
+				"url": "http://localhost:5279/lbryapi",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"jsonrpc\": \"2.0\",\n\t\"method\":\"version\"\n}"
+				},
+				"description": "Get lbry version information\n\nArgs:\n    None\nReturns:\n    (dict) Dictionary of lbry version information\n    {\n        'build': (str) build type (e.g. \"dev\", \"rc\", \"release\"),\n        'ip': (str) remote ip, if available,\n        'lbrynet_version': (str) lbrynet_version,\n        'lbryum_version': (str) lbryum_version,\n        'lbryschema_version': (str) lbryschema_version,\n        'os_release': (str) os release string\n        'os_system': (str) os name\n        'platform': (str) platform string\n        'processor': (str) processor type,\n        'python_version': (str) python version,\n    }"
+			},
+			"response": []
+		},
+		{
+			"name": "Status",
+			"request": {
+				"url": "http://localhost:5279/lbryapi",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"jsonrpc\": \"2.0\",\n\t\"method\":\"status\"\n}"
+				},
+				"description": "Return daemon status\n\nArgs:\n    'session_status' (optional): (bool) true to return session status,\n        default is false\nReturns:\n    (dict) Daemon status dictionary"
+			},
+			"response": []
+		},
+		{
+			"name": "Resolve Name",
+			"request": {
+				"url": "http://localhost:5279/lbryapi",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"jsonrpc\": \"2.0\",\n\t\"method\":\"resolve_name\",\n\t\"params\":\n\t{\n\t\t\"name\":\"dfclogo\"\n\t}\n}"
+				},
+				"description": "Resolve stream info from a LBRY name\n\nArgs:\n    'name': (str) name to look up, do not include lbry:// prefix\nReturns:\n    (dict) Metadata dictionary from name claim, None if the name is not\n            resolvable"
+			},
+			"response": []
+		},
+		{
+			"name": "Help",
+			"request": {
+				"url": "http://localhost:5279/lbryapi",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"jsonrpc\": \"2.0\",\n\t\"method\":\"help\"\n}"
+				},
+				"description": "Return a useful message for an API command\n\nArgs:\n    'command'(optional): (str) command to retrieve documentation for\nReturns:\n    (str) if given a command, returns documentation about that command\n    otherwise returns general help message"
+			},
+			"response": []
+		},
+		{
+			"name": "Help Command",
+			"request": {
+				"url": "http://localhost:5279/lbryapi",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"jsonrpc\": \"2.0\",\n\t\"method\":\"help\",\n\t\"params\":\n\t{\n\t\t\"command\":\"publish\"\n\t}\n}"
+				},
+				"description": "Return a useful message for an API command\n\nArgs:\n    'command'(optional): (str) command to retrieve documentation for\nReturns:\n    (str) if given a command, returns documentation about that command\n    otherwise returns general help message"
+			},
+			"response": []
+		},
+		{
+			"name": "Wallet Encrypt",
+			"request": {
+				"url": "http://localhost:5279/lbryapi",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"jsonrpc\": \"2.0\",\n\t\"method\":\"wallet_encrypt\", \n\t\"params\":\n\t{\n\t\t\"new_password\":\"<new_password>\"\n\t}\n}"
+				},
+				"description": "Encrypts the wallet private key, thereby requiring having to unlock the wallet before transactions can be sent from the wallet. The master_private_keys field in the default_wallet file will be updated with the encrypted private key string. After a wallet has been encrypted, you will need to use the wallet_unlock command to allow the wallet to be used. An encrypted wallet also needs to be unlocked upon daemon start up. There is a log entry during the daemon start up process which reads \"Waiting for wallet password\". Using wallet_unlock with the correct password at this point will allow the daemon to launch successfully."
+			},
+			"response": []
+		},
+		{
+			"name": "Wallet Decrypt",
+			"request": {
+				"url": "http://localhost:5279/lbryapi",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"jsonrpc\": \"2.0\",\n\t\"method\":\"wallet_decrypt\", \n\t\"params\":\n\t{\n\t}\n}"
+				},
+				"description": "Encrypts the wallet private key, thereby requiring having to unlock the wallet before transactions can be sent from the wallet. The master_private_keys field in the default_wallet file will be updated with the encrypted private key string. After a wallet has been encrypted, you will need to use the wallet_unlock command to allow the wallet to be used. An encrypted wallet also needs to be unlocked upon daemon start up. There is a log entry during the daemon start up process which reads \"Waiting for wallet password\". Using wallet_unlock with the correct password at this point will allow the daemon to launch successfully."
+			},
+			"response": []
+		},
+		{
+			"name": "Wallet Unlock",
+			"request": {
+				"url": "http://localhost:5279/lbryapi",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"jsonrpc\": \"2.0\",\n\t\"method\":\"wallet_unlock\", \n\t\"params\":\n\t{\n\t\t\"password\": \"<password>\"\n\t}\n}"
+				},
+				"description": "Unlocks the wallet if the specified password matches the password that was used to encrypt the wallet. As stated above, the wallet needs to be unlocked to send transactions, or in order to allow the to daemon start up completely."
+			},
+			"response": []
+		}
+	]
+}
